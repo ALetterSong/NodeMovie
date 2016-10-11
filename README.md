@@ -4,13 +4,13 @@
 
 所使用的技术：
 
-[Node.js](https://nodejs.org/zh-cn/)
-[Express](http://expressjs.com/zh-cn/)
-[MongoDB](https://www.mongodb.com/cn)
-[mongoose](http://mongoosejs.com/)
-[jade](https://www.npmjs.com/package/jade)
-[Bootstrap](http://www.bootcss.com/)
-[jQuery](https://jquery.com/)
+[Node.js](https://nodejs.org/zh-cn/)  
+[Express](http://expressjs.com/zh-cn/)  
+[MongoDB](https://www.mongodb.com/cn)  
+[mongoose](http://mongoosejs.com/)  
+[jade](https://www.npmjs.com/package/jade)  
+[Bootstrap](http://www.bootcss.com/)  
+[jQuery](https://jquery.com/)  
 
 一些问题的解决方案：
 
