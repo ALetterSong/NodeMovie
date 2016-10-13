@@ -26,9 +26,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
-app.listen(port);
 
-console.log('started on port ' + port);
+var server = app.listen(port, '0.0.0.0', function () {
+    console.log('Express server started on port %s at %s in %s mode',
+        server.address().port,
+        server.address().address,
+        app.get('env'));
+});
 
 // 首页
 app.get('/', function (req, res) {
@@ -184,6 +188,22 @@ app.post('/user/signup', function (req, res) {
 
 
 });
+
+app.post('/user/signin', function (req, res) {
+    var _user = req.body.user;
+    var name = _user.name;
+    var password = _user.password;
+
+    User.findOne({name: name}, function (err, user) {
+        if (err) {
+            console.log(err)
+        }
+
+        if (!user) {
+            return res.redirect('/');
+        }
+    })
+})
 
 // 用户列表页
 app.get('/admin/userlist', function (req, res) {
