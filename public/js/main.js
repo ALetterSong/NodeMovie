@@ -24,7 +24,7 @@ $(function () {
     });
 
 
-    $('#form-signup .btn-success').click(function () {
+    $('#form-signup .btn-success').click(function (ev) {
         // $(".form-signup").valid();
         var $$ = $('#form-signup');
         var data = $$.serializeArray();
@@ -54,6 +54,10 @@ $(function () {
                 }
             }
         });
+        //推荐方法，也可使用 <button type="button">submit<button>
+        ev.stopPropagation();
+        ev.preventDefault();
         // return false;
+
     });
 });
