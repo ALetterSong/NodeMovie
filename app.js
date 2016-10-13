@@ -9,16 +9,21 @@ var path = require('path');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var Movie = require('./models/movie')
+var User = require('./models/user')
 var bodyParser = require('body-parser');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3033;
 var app = express();
 
 mongoose.connect('mongodb://localhost/nodemovie')
 
 app.set('views', './views/pages');
 app.set('view engine', 'jade');
-app.use(bodyParser());
+// app.use(bodyParser());//Now deprecated
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
 app.listen(port);
@@ -150,4 +155,51 @@ app.delete('/admin/list', function (req, res) {
             }
         })
     }
+});
+
+// 用户注册
+app.post('/user/signup', function (req, res) {
+    var _user = req.body.user;
+    User.findOne({name: _user.name}, function (err, user) {
+        if (err) {
+            console.log(err);
+        }
+        if (user) {
+            res.send({message: "error", info: "username is exist"});
+        } else {
+            var user = new User(_user);
+
+            user.save(function (err, user) {
+                if (err) {
+                    console.log(err);
+                }
+                res.send({message: "success", url: "/admin/userlist"});
+
+                // res.redirect('/admin/userlist');
+                // console.log("user: " + user);
+                // console.log("_user: " + _user);
+            });
+        }
+    })
+
+
+});
+
+// 用户列表页
+app.get('/admin/userlist', function (req, res) {
+    User.fetch(function (err, users) {
+        if (err) {
+            console.log(err);
+        }
+
+        res.render('userlist', {
+            title: '用户列表',
+            users: users
+        })
+    })
+});
+
+
+app.get('/test', function (req, res) {
+
 });

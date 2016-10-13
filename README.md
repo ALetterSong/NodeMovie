@@ -10,7 +10,7 @@
 [mongoose](http://mongoosejs.com/)  
 [jade](https://www.npmjs.com/package/jade)  
 [Bootstrap](http://www.bootcss.com/)  
-[jQuery](https://jquery.com/)  
+[jQuery](https://jquery.com/)   
 
 一些问题的解决方案：
 
